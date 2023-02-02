@@ -24,6 +24,7 @@ media
 .idea/**/contentModel.xml
 
 # Sensitive or high-churn files
+.idea
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -31,6 +32,10 @@ media
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+
+Procfile
+
+.DS_Store
 
 # Gradle
 .idea/**/gradle.xml

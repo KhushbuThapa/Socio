@@ -1,6 +1,6 @@
-# django_boiler_plate
+# django_socio_app
 
-djanfo_socio is an initial Django project enabling communication between two individuals.
+django_socio is an initial Django project enabling communication between two individuals.
 
 ## Getting started with this boilerplate:
 ##### (eg. in any Linux distribution, you can follow a similar process in another os also.)
