@@ -9,7 +9,7 @@ urlpatterns = [
     path('public-profile/<str:username>/', views.public_profile, name='public-profile'),
 
     # Password Reset Urls
-    path('password_reset/', PasswordResetView.as_view(template_name='users/password_reset_email.html'), name='password_reset'),
+    # path('password_reset/', PasswordResetView.as_view(template_name='users/password_reset_email.html'), name='password_reset'),
     # path('password_reset_sent/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     # path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='users/password_reset_email.html'), name='password_reset_confirm'),
     # path('reset_password_complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
