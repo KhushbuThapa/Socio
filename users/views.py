@@ -187,21 +187,7 @@ class ProfileDetailView(LoginRequiredMixin,DetailView):
         
         return context
 
-# def send_reset_email(request):
-#     email = request.POST.get('email')
-#     from django.core.mail import send_mail
-#     try:
-#         result = send_mail(
-#             'Socio: Password Reset',
-#             'This is the password reset form.',
-#             'socio.password.manager@example.com',
-#             [email],
-#             fail_silently=False,
-#         )
-#         return render(request, 'users/password_reset_done.html')
-#     except Exception as e:
-#         pass
-#         # Handle Exception
+
 
 
 

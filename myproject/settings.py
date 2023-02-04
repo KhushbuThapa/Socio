@@ -80,7 +80,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'users/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'myproject/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -158,15 +158,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
-STATIC_URL = '/static/'
+STATUC_ROOT = os.path.join(BASE_DIR, '../static')
+STATIC_URL = 'static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'blog-home'
+# LOGIN_REDIRECT_URL = 'home'
+# ACCOUNT_LOGOUT_REDIRECT_URL = 'account_logout'
 LOGIN_URL = 'account_login'
 
 CKEDITOR_CONFIGS = {
@@ -221,3 +222,8 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/var/www/static/',
+]
