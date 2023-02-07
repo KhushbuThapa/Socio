@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'ckeditor',
-    'allauth',
+    # 'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
@@ -80,7 +80,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'myproject/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -166,9 +166,9 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
 # ACCOUNT_LOGOUT_REDIRECT_URL = 'account_logout'
-LOGIN_URL = 'account_login'
+LOGIN_URL = 'login'
 
 CKEDITOR_CONFIGS = {
     'default': {
