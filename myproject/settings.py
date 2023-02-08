@@ -51,11 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'ckeditor',
-    # 'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
+    'social_django',
+
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
     'notification',
@@ -73,6 +70,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -88,6 +88,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Social Django Templates
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -96,6 +100,14 @@ TEMPLATES = [
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+
+    # Social Django Backends
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+
 ]
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
@@ -166,7 +178,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/home'
 # ACCOUNT_LOGOUT_REDIRECT_URL = 'account_logout'
 LOGIN_URL = 'login'
 
@@ -204,26 +216,23 @@ CHANNEL_LAYERS = {
 
 SITE_ID = 2     # considering 2nd site in 'Sites' to be 127.0.0.1 (for dev)
 
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        }
-    },
-    'github': {
-        'SCOPE': [
-            'user',
-            'repo',
-            'read:org',
-        ],
-    }
-}
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    '/var/www/static/',
 ]
+
+# Social Django
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '55507575741-e8d5dp0vi7l0nf4of2pogcs463k8krib.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+SOCIAL_AUTH_INSTAGRAM_KEY = ''
+SOCIAL_AUTH_INSTAGRAM_SECRET = ''
+
+SOCIAL_AUTH_GITHUB_KEY = '5003e1b7bfc57645231a'
+SOCIAL_AUTH_GITHUB_SECRET = '61f8ae648a85f59ef0732e9600597f9e687a8049'
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '504293705117889'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'cd36c7e28bf4c39ae8c8bbb13f0cbe2e'
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.10'

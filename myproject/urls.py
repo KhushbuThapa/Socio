@@ -20,6 +20,9 @@ from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+# from social_django.views import auth
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +42,10 @@ urlpatterns = [
     path('chats/', include('chat.urls')),
     path('vc/', include('videocall.urls')),
     path('friend/', include('friend.urls', namespace='friend')),
+
+    # Social Django Urls
+    path('', include('social_django.urls', namespace='social')),
+
 ]
 
 if settings.DEBUG:
