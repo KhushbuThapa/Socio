@@ -187,6 +187,16 @@ class ProfileDetailView(LoginRequiredMixin,DetailView):
         
         return context
 
+def upload_image(request):
+    if request.method == 'POST':
+            form = Profile(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+            else:
+                form = Profile()
+            return render(request, 'upload.html', {'form': form})
+
 
 
 
