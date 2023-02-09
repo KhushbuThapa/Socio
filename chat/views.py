@@ -12,7 +12,7 @@ def room_enroll(request):
     friends = FriendList.objects.filter(user=request.user)[0].friends.all()
     all_rooms = Room.objects.filter(
         Q(author=request.user) | Q(friend=request.user)
-    ).order_by('-created')
+    ).order_by('-created').distinct()
 
     context = {
         'all_rooms':all_rooms,
@@ -54,7 +54,7 @@ def room(request, room_name, friend_id):
 
     chats = Chat.objects.filter(
         room_id=room_name
-    ).order_by('date')
+    ).order_by('date').distinct()
 
     context = {
         'old_chats':chats,
@@ -62,4 +62,6 @@ def room(request, room_name, friend_id):
         'friend_name':User.objects.get(pk=friend_id),
         'room_name': room_name
     }
-    return render(request, 'chat/chatroom.html', context)
+    return render(request, 'chat/chatroom.html', {'data': context})
+
+

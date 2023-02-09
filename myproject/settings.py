@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'chat',
     'channels',
     'friend',
-    'videocall',
 ]
 
 MIDDLEWARE = [

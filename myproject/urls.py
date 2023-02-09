@@ -40,7 +40,6 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('notifications/', include('notification.urls')),
     path('chats/', include('chat.urls')),
-    path('vc/', include('videocall.urls')),
     path('friend/', include('friend.urls', namespace='friend')),
 
     # Social Django Urls

@@ -7,13 +7,13 @@
 <div class="col-md-8 m-auto">
 
 <div class="container content-section px-0 py-0">
-    
+
     <div class="bg-gray py-1 px-3">
-        <p class="h5 mb-0 py-2">  
-            <span class="img-cont2">              
+        <p class="h5 mb-0 py-2">
+            <span class="img-cont2">
                 <img src="{{friend_name.profile.image.url}}" alt="user" width="50" height="50" class="rounded-circle">
                 {% if friend_name.profile.is_online %}
-                    <span class="online-circle3"></span>  
+                    <span class="online-circle3"></span>
                 {% else %}
                     <span class="offline-circle3"></span>
                 {% endif %}
@@ -40,7 +40,7 @@
                     <p class="small text-muted">{{chat.date}}</p>
                 </div>
                 </div>
-                
+
                 {% else %}
 
                 <!-- Reciever Message-->
@@ -52,7 +52,7 @@
                     <p class="small text-muted">{{chat.date}}</p>
                 </div>
                 </div>
-                
+
                 {% endif %}
 
             {% endfor %}
@@ -63,7 +63,7 @@
 
     <div class="px-0">
         <!-- Typing area -->
-        <form class="bg-light chat-form">
+        <form class="bg-light chat-form" action="">
           <div class="input-group">
             <input id="input" name="body" type="text" placeholder="Type your message here" aria-describedby="submit" class="form-control rounded-0 border-0 py-4 bg-light">
             <div class="input-group-append">
@@ -113,6 +113,28 @@
             }
         });
 
+        debugger;
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://' +
+            window.location.host +
+            '/ws/chat/' +
+            roomName +
+            '/'
+        );
+
+        chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            console.log(data)
+
+            if (data.username != my_name)
+                add_sender_chat(data)
+            else
+                add_receiver_chat(data)
+        }
+
         let my_name = '{{ my_name }}';
         const user_username = JSON.parse(document.getElementById('user_username').textContent);
         const user_image = JSON.parse(document.getElementById('user_image').textContent);
@@ -135,29 +157,8 @@
         };
 
 
-        const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
-        const chatSocket = new WebSocket(
-            'ws://' +
-            window.location.host +
-            '/ws/chat/' +
-            roomName +
-            '/'
-        );
-
-        chatSocket.onmessage = function (e) {
-            const data = JSON.parse(e.data);
-            console.log(data)
-            
-            if (data.username != my_name)
-                add_sender_chat(data)
-            else
-                add_receiver_chat(data)
-        }
-
-
         function add_sender_chat(data) {
-            
+
             var chat_window = document.querySelector('.chat-text-add')
             var message = document.createElement('div')
             message.classList.add('media', 'w-75', 'mb-3')

@@ -302,9 +302,13 @@ def search(request):
     else:
         allpostsTitle = Post.objects.filter(title__icontains=query)
         allpostsAuthor = Post.objects.filter(author__username = query)
+        allUser = User.objects.filter(username__icontains=query)
         allposts = allpostsAuthor.union(allpostsTitle)
-    
-    params = {'allposts': allposts}
+        count = allUser.count() + allposts.count()
+
+    params = {'allposts': allposts,
+              'allusers': allUser,
+              'count':count}
     return render(request, 'blog/search_results.html', params)
 
 

@@ -7,12 +7,12 @@
 <div class="col-md-8 m-auto">
   
 <div class="content-section">
-  <h3>Search Results ({{allposts|length}})</h3>
+  <h3>Search Results ({{count}})</h3>
 </div>
 
-    {% if allposts|length == 0 %}
+    {% if allposts|length == 0 and allusers|length == 0 %}
       <div class="content-section">
-        <p>Your search did not match any posts ...</p>
+        <p>Your search did not match any posts and users ...</p>
 
         <p class="text-muted">Suggestions:</p>
         <ul class="text-muted">
@@ -22,6 +22,7 @@
       </div>
       <br><br>
     {% endif %}
+    {#  Posts #}
     {% for post in allposts %}
 
     <article class="content-section" style="overflow: auto;">
@@ -41,6 +42,23 @@
     </article>
 
     {% endfor %}
+    {#  END of Posts #}
+
+    {# Users #}
+
+    {% for user in allusers %}
+
+    <article class="content-section" style="overflow: auto;">
+      <div class="media">
+          <img class="rounded-circle article-img" src="{{user.profile.image}}" alt="image">
+          <a href="{% url 'profile-detail-view' user.pk %}">{{ user.first_name}} {{ user.last_name }}</a>
+      </div>
+      <hr>
+    </article>
+
+    {% endfor %}
+    {# END of Users #}
+
 
     {% if is_paginated %}
 
